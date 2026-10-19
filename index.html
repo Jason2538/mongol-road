@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="description" content="몽골 초원의 길을 오토바이로 달리며 풍경을 즐기는 1인용 웹 라이딩 게임" />
+  <title>몽골 로드</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <canvas id="c"></canvas>
+  <div id="vignette"></div>
+  <div id="flash"></div>
+
+  <div id="hud">
+    <div id="speedBox"><span id="spd">0</span><small>km/h</small></div>
+    <div class="row"><span>기어</span><b id="gear">N</b><span id="modeTxt"></span></div>
+    <div id="rpmBar"><div id="rpmFill"></div></div>
+    <div class="row small"><span id="rpmTxt">0 rpm</span></div>
+    <div class="row small"><span id="surf">포장도로</span></div>
+    <div class="row small"><span id="dist">0.0 km</span><span id="cruiseTxt"></span></div>
+  </div>
+
+  <div id="topbtns">
+    <button id="btnCruise">크루즈</button>
+    <button id="btnCam">시점</button>
+    <button id="btnSet">설정</button>
+  </div>
+
+  <div id="touch">
+    <div class="grp left">
+      <button class="tb" data-act="left">◀</button>
+      <button class="tb" data-act="right">▶</button>
+    </div>
+    <div class="grp right">
+      <button class="tb small" data-act="brake">브레이크</button>
+      <button class="tb big" data-act="gas">가속</button>
+    </div>
+  </div>
+
+  <div id="toast"></div>
+
+  <div id="start" class="panel">
+    <div class="card">
+      <h1>몽골 로드</h1>
+      <p class="sub">초원의 길을 오토바이로 달리며 풍경을 즐겨 보세요. 점수도, 제한 시간도 없습니다.</p>
+      <label>주행 모드
+        <select id="selMode0">
+          <option value="tour">관광 모드 (최고 80km/h)</option>
+          <option value="speed">스피드 모드 (최고 160km/h)</option>
+        </select>
+      </label>
+      <label>그래픽 품질
+        <select id="selQuality0">
+          <option value="low">낮음</option>
+          <option value="medium">중간</option>
+          <option value="high">높음</option>
+        </select>
+      </label>
+      <button id="btnStart" class="primary">출발</button>
+      <p class="help pc">W/↑ 가속 · S/↓/Space 브레이크 · A D/←→ 조향 · Q 크루즈 · C 시점 · Esc 일시정지</p>
+      <p class="help touchonly">화면 아래의 버튼으로 조작합니다.</p>
+    </div>
+  </div>
+
+  <div id="settings" class="panel hidden">
+    <div class="card">
+      <h2>설정</h2>
+      <label>주행 모드
+        <select id="selMode">
+          <option value="tour">관광 모드 (최고 80km/h)</option>
+          <option value="speed">스피드 모드 (최고 160km/h)</option>
+        </select>
+      </label>
+      <label>그래픽 품질
+        <select id="selQuality">
+          <option value="low">낮음</option>
+          <option value="medium">중간</option>
+          <option value="high">높음</option>
+        </select>
+      </label>
+      <label class="chk"><input type="checkbox" id="chkAssist" /> 주행 보조 (도로를 따라 자동으로 핸들을 잡아 줌)</label>
+      <label class="chk"><input type="checkbox" id="chkHud" /> 계기판 표시</label>
+      <label>엔진 소리 <input type="range" id="rngEngine" min="0" max="1" step="0.05" /></label>
+      <label>바람 소리 <input type="range" id="rngWind" min="0" max="1" step="0.05" /></label>
+      <div class="btns">
+        <button id="btnShot">스크린샷 저장</button>
+        <button id="btnResume" class="primary">계속하기</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="rotate">화면을 가로로 돌려 주세요</div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
