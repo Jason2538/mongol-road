@@ -1,0 +1,58 @@
+:root { --fg: #fff; --bg: rgba(18, 22, 28, 0.62); --accent: #e8821e; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #cfe0ee; color: var(--fg);
+  font-family: system-ui, -apple-system, 'Segoe UI', 'Malgun Gothic', sans-serif; touch-action: none; user-select: none; }
+canvas { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+.hidden { display: none !important; }
+
+#vignette { position: fixed; inset: 0; pointer-events: none; opacity: 0;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.55) 100%); }
+#flash { position: fixed; inset: 0; pointer-events: none; background: #fff; opacity: 0; transition: opacity 0.5s; }
+
+#hud { position: fixed; left: 16px; top: 16px; padding: 10px 14px; border-radius: 14px; background: var(--bg);
+  backdrop-filter: blur(4px); min-width: 150px; pointer-events: none; text-shadow: 0 1px 2px #0008; }
+#speedBox { display: flex; align-items: baseline; gap: 6px; }
+#spd { font-size: 46px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1; }
+#speedBox small { opacity: 0.8; }
+#hud .row { display: flex; gap: 8px; align-items: baseline; margin-top: 4px; }
+#hud .row b { font-size: 20px; color: var(--accent); }
+#hud .small { font-size: 12.5px; opacity: 0.9; }
+#rpmBar { height: 6px; background: #fff3; border-radius: 3px; overflow: hidden; margin-top: 6px; }
+#rpmFill { height: 100%; width: 0; background: linear-gradient(90deg, #7fd36a, #f2c230, #e5453a); }
+#cruiseTxt { color: #8fe3a0; margin-left: auto; }
+
+#topbtns { position: fixed; right: 12px; top: 12px; display: flex; gap: 8px; }
+#topbtns button, .btns button, .primary { border: 0; border-radius: 12px; padding: 10px 14px; font-size: 14px; color: var(--fg);
+  background: var(--bg); backdrop-filter: blur(4px); cursor: pointer; font-family: inherit; }
+#topbtns button.on { background: #2f8f4e; }
+.primary { background: var(--accent) !important; font-weight: 700; }
+
+#touch { display: none; position: fixed; left: 0; right: 0; bottom: 0; padding: 0 16px calc(16px + env(safe-area-inset-bottom));
+  justify-content: space-between; align-items: flex-end; pointer-events: none; }
+@media (pointer: coarse) { #touch { display: flex; } .pc { display: none; } }
+@media (pointer: fine) { .touchonly { display: none; } }
+.grp { display: flex; gap: 14px; align-items: flex-end; }
+.tb { pointer-events: auto; touch-action: none; border: 0; border-radius: 22px; color: var(--fg); font-size: 22px; font-weight: 700;
+  width: 84px; height: 84px; background: rgba(18, 22, 28, 0.5); border: 2px solid #fff4; font-family: inherit; }
+.tb.small { width: 92px; height: 64px; font-size: 14px; }
+.tb.big { width: 120px; height: 120px; border-radius: 60px; background: rgba(232, 130, 30, 0.7); }
+.tb.down { background: rgba(255, 255, 255, 0.45); transform: scale(0.96); }
+
+#toast { position: fixed; left: 50%; top: 18%; transform: translateX(-50%); padding: 10px 18px; border-radius: 20px; background: var(--bg);
+  opacity: 0; transition: opacity 0.4s; pointer-events: none; white-space: nowrap; }
+
+.panel { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(10, 14, 20, 0.35); backdrop-filter: blur(3px); }
+.card { width: min(92vw, 420px); max-height: 94vh; overflow: auto; padding: 22px; border-radius: 20px; background: rgba(18, 22, 28, 0.82); }
+.card h1 { margin: 0 0 4px; font-size: 34px; letter-spacing: 1px; }
+.card h2 { margin: 0 0 12px; }
+.card .sub { margin: 0 0 16px; opacity: 0.85; line-height: 1.5; font-size: 14px; }
+.card label { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; font-size: 14px; }
+.card label.chk { flex-direction: row; align-items: center; gap: 8px; }
+.card select { padding: 10px; border-radius: 10px; border: 0; font-size: 15px; font-family: inherit; }
+.card .primary { width: 100%; padding: 14px; font-size: 17px; margin-top: 4px; }
+.card .help { font-size: 12.5px; opacity: 0.75; line-height: 1.5; margin: 12px 0 0; }
+.btns { display: flex; gap: 8px; margin-top: 8px; } .btns button { flex: 1; }
+
+#rotate { display: none; position: fixed; inset: 0; z-index: 9; align-items: center; justify-content: center; background: #10161d; font-size: 20px; }
+@media (pointer: coarse) and (orientation: portrait) { #rotate { display: flex; } }
+@media (max-height: 460px) { #spd { font-size: 34px; } #hud { padding: 8px 12px; } .tb.big { width: 100px; height: 100px; } .tb { width: 70px; height: 70px; } }
