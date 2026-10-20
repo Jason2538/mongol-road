@@ -32,7 +32,7 @@ export class BikeModel {
       const o = new THREE.Mesh(geo, m); o.position.set(x, y, z); o.castShadow = true; parent.add(o); return o;
     };
 
-    // 바퀘: 타이어, 림, 살, 허브, 브레이크 디스크
+    // 바퀴: 타이어, 림, 살, 허브, 브레이크 디스크
     const wheel = (z) => {
       const g = new THREE.Group(); g.position.set(0, 0.37, z);
       const tire = new THREE.Mesh(new THREE.TorusGeometry(0.3, 0.075, 8, 18).rotateY(Math.PI / 2), black); tire.castShadow = true;
@@ -75,7 +75,7 @@ export class BikeModel {
     this.rider = new THREE.Group();
     L.add(this.rider);
     const R = this.rider, jacket = blue, helm = mat(0xda2032, { roughness: 0.3, metalness: 0.2 }), pants = mat(0x2a2a3a), glove = mat(0x222226, { roughness: 0.8 });
-    seg(R, V(0, 1.0, 0.3), V(0, 1.45, 0.0), 0.17, jacket);                         // 욕통
+    seg(R, V(0, 1.0, 0.3), V(0, 1.45, 0.0), 0.17, jacket);                         // 몸통
     add(new THREE.SphereGeometry(0.17, 12, 10), helm, 0, 1.74, -0.1, R);           // 헬멧
     add(new THREE.SphereGeometry(0.17, 12, 10, -0.9, 1.8, 0.7, 1.0), mat(0x101418, { roughness: 0.15, metalness: 0.6 }), 0, 1.74, -0.1, R).scale.set(1.03, 1.03, 1.03); // 바이저
     const stripe = add(new THREE.BoxGeometry(0.05, 0.02, 0.36), gold, 0, 1.91, -0.1, R); stripe.rotation.x = 0.0;
