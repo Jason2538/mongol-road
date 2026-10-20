@@ -1,7 +1,8 @@
 import * as THREE from 'three';
 import { Road, SURFACES } from './road.js';
 import { World, QUALITY } from './world.js';
-import { Bike, BikeModel } from './bike.js';
+import { Bike } from './bike.js';
+import { BikeModel } from './bikemodel.js';
 import { Input } from './input.js';
 import { AudioSys } from './audio.js';
 import { clamp } from './util.js';
@@ -26,10 +27,14 @@ try {
   document.body.innerHTML = '<p style="padding:24px;color:#fff">이 브라우저에서는 3D(WebGL)를 사용할 수 없습니다. 최신 Chrome, Edge, Safari로 열어 주세요.</p>';
   throw e;
 }
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.2;
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(62, innerWidth / innerHeight, 0.15, 6500);
 const road = new Road(7);
-const world = new World(scene, road, S.quality);
+const world = new World(scene, road, S.quality, Math.min(8, renderer.capabilities.getMaxAnisotropy()));
 const bike = new Bike(road);
 const model = new BikeModel();
 scene.add(model.root);
@@ -136,6 +141,7 @@ function updateCamera(dt, time) {
   const fov = 62 + sp * 18;
   if (Math.abs(camera.fov - fov) > 0.1) { camera.fov = fov; camera.updateProjectionMatrix(); }
   $('vignette').style.opacity = clamp((sp - 0.25) * 1.2, 0, 0.8);
+  model.shadow.visible = !world.shadowOn;
   model.update(pose, bike, time);
 }
 
@@ -171,7 +177,7 @@ function frame(now) {
   }
 
   updateCamera(raw, time);
-  world.update(bike.s, camera, time);
+  world.update(bike.s, camera, time, pose);
   audio.update(bike.rpmN, bike.throttle, bike.v / 44, SURFACES[bike.surface].rough, !running || paused);
   renderer.render(scene, camera);
 
