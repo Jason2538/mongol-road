@@ -5,8 +5,8 @@ export const ROAD_HALF = 3.5; // 도로 반폭(m) -> 폭 7m (2차선 기준의 �
 
 // 노면 종류. grip=접지력, roll=구름저항(m/s²), rough=진동 세기, color=sRGB
 export const SURFACES = {
-  paved: { name: '포장도로', grip: 1.0, roll: 0.12, rough: 0.05, color: [0.2, 0.2, 0.22], vary: 0.02 },
-  cracked: { name: '갈라진 포장', grip: 0.9, roll: 0.2, rough: 0.35, color: [0.3, 0.29, 0.28], vary: 0.07 },
+  paved: { name: '포장도로', grip: 1.0, roll: 0.12, rough: 0.05, color: [0.36, 0.36, 0.39], vary: 0.025 },
+  cracked: { name: '갈라진 포장', grip: 0.9, roll: 0.2, rough: 0.35, color: [0.45, 0.43, 0.41], vary: 0.08 },
   gravel: { name: '자갈길', grip: 0.62, roll: 0.6, rough: 0.7, color: [0.56, 0.51, 0.43], vary: 0.06 },
   dirt: { name: '흙길', grip: 0.68, roll: 0.8, rough: 0.55, color: [0.5, 0.37, 0.24], vary: 0.05 },
   grass: { name: '초원 (도로 밖)', grip: 0.5, roll: 2.8, rough: 0.8, color: [0.5, 0.55, 0.3], vary: 0.05 },
